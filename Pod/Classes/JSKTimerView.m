@@ -91,6 +91,7 @@ static NSString *jsk_progressAnimationKey = @"progressAnimationKey";
     
     self.progressLayer.frame = self.bounds;
     [self updatePathWithBounds:self.bounds];
+    [self updateStrokeWidthWithBounds:self.bounds];
 }
 
 - (void)dealloc {
@@ -311,11 +312,11 @@ static NSString *jsk_progressAnimationKey = @"progressAnimationKey";
 }
 
 - (void)createLayer {
-    self.strokeWidth = CGRectGetWidth(self.bounds) / 15;
+    [self updateStrokeWidthWithBounds:self.bounds];
     
     CAShapeLayer *progressLayer = [CAShapeLayer layer];
     progressLayer.path = self.strokePath.CGPath;
-    progressLayer.fillColor = [[UIColor clearColor] CGColor];
+    progressLayer.fillColor = [[UIColor whiteColor] CGColor];
     progressLayer.lineWidth = self.strokeWidth;
     progressLayer.strokeColor = [self.progressStartColor CGColor];
     progressLayer.strokeEnd = 0;
@@ -324,6 +325,14 @@ static NSString *jsk_progressAnimationKey = @"progressAnimationKey";
     
     [self.layer addSublayer:progressLayer];
 }
+
+- (void)updateStrokeWidthWithBounds:(CGRect)bounds {
+    self.strokeWidth = CGRectGetWidth(bounds) / 15;
+    self.progressLayer.lineWidth = self.strokeWidth;
+    
+    [self setNeedsDisplay];
+}
+
 
 - (void)createPath {
     [self updatePathWithBounds:self.bounds];
