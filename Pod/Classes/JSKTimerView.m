@@ -96,6 +96,7 @@ static NSString *jsk_progressAnimationKey = @"progressAnimationKey";
     [super layoutSubviews];
     
     self.progressLayer.frame = self.bounds;
+    [self updatePathWithBounds:self.bounds];
 }
 
 - (void)dealloc {
@@ -331,8 +332,12 @@ static NSString *jsk_progressAnimationKey = @"progressAnimationKey";
 }
 
 - (void)createPath {
-    CGPoint center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
-    self.progressLayer.path = [UIBezierPath bezierPathWithArcCenter:center radius:self.bounds.size.width / 2 - 6 startAngle:-M_PI_2 endAngle:-M_PI_2 + 2 * M_PI clockwise:YES].CGPath;
+    [self updatePathWithBounds:self.bounds];
+}
+
+- (void)updatePathWithBounds:(CGRect)bounds {
+    CGPoint center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
+    self.progressLayer.path = [UIBezierPath bezierPathWithArcCenter:center radius:bounds.size.width / 2 - 6 startAngle:-M_PI_2 endAngle:-M_PI_2 + 2 * M_PI clockwise:YES].CGPath;
 }
 
 #pragma mark - Private Update UI Methods
