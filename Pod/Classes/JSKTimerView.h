@@ -36,7 +36,6 @@
 
 @end
 
-
 /**
  `JSKTimerView` is a custom UIView class which represents a simple, self-contained timer with different color states based on how close the timer is to finishing.
  */
@@ -65,9 +64,36 @@
 @property (nonatomic, strong) UIColor *labelTextColor;
 
 /**
+ The progress stroke color
+ */
+@property (nonatomic, strong) UIColor *progressColor;
+
+/**
+ The progress stroke color
+ */
+@property (nonatomic, strong) UIColor *progressStartColor;
+
+/**
+ The progress stroke near finish color
+ */
+@property (nonatomic, strong) UIColor *progressNearFinishedColor;
+
+/**
+ The progress stroke almost finish color
+ */
+@property (nonatomic, strong) UIColor *progressAlmostFinishedColor;
+
+/**
+ The progress finished color
+ */
+@property (nonatomic, strong) UIColor *progressFinishedColor;
+
+/**
  The delegate called when the timer has naturally finished
  */
 @property (nonatomic, weak) id<JSKTimerViewDelegate> delegate;
+
+
 
 
 ///-----------------------------------------------------------
